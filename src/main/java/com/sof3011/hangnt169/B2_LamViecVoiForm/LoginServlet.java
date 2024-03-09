@@ -25,11 +25,14 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Truyen gia tri servlet sang jsp => setAttribute
+        String mess ="SD18314";
+        request.setAttribute("a",mess);
         // Chuyen trang
-        // C1:
-//        request.getRequestDispatcher("buoi2.jsp").forward(request,response);
+        // C1: Mang gia tri di
+        request.getRequestDispatcher("/buoi2/test/form-login.jsp").forward(request,response);
         // C2:
-        response.sendRedirect("buoi2.jsp");
+//        response.sendRedirect("/buoi2/test/form-login.jsp");
     }
 
     @Override
