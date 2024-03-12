@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", value = "/login")
+@WebServlet(name = "LoginServlet", value = {
+        "/login","/ket-qua"
+}) // VALUE CO THE CHUA NHIEU DUONG DAN CUNG 1 luc
 // Ctrl Alt O => Fix import
 // Ctrl Alt L => Format code
 // Value => Chua duong dan . Bat buoc phai bat dau bang / => K build tomcat
@@ -37,6 +39,14 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // B1: Lay gia tri tu jsp => servlet => getParameter => lay thong qua name
+        String username = request.getParameter("a");
+        String password = request.getParameter("b");
 
+        // B2: Day gia tri tu servlet => jsp
+        request.setAttribute("x1",username);
+        request.setAttribute("x2",password);
+        // B3: Chuyen trang
+        request.getRequestDispatcher("/buoi2/test/result.jsp").forward(request,response);
     }
 }

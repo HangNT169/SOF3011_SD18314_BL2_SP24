@@ -8,12 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet( value = "/ket-qua")
+@WebServlet( value = "/ket-qua1")
 
 public class KetQuaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/buoi2/test/test.jsp").forward(request,response);
     }
 
     @Override

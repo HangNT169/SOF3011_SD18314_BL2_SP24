@@ -15,10 +15,10 @@ ${a}
 <form action="/ket-qua" method="post">
     <div class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="a" required>
+        <input type="text" placeholder="Enter Username" name="a" >
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="b" required>
+        <input type="password" placeholder="Enter Password" name="b" >
 
         <button type="submit">Login</button>
     </div>
