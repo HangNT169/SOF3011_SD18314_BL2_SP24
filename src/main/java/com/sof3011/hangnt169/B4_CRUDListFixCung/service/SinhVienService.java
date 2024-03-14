@@ -22,4 +22,26 @@ public class SinhVienService {
         return listSinhVien;
     }
 
+    public SinhVien detail(String mssv) {
+        for (SinhVien sv : listSinhVien) {
+            if (sv.getMssv().equals(mssv)) {
+                return sv;
+            }
+        }
+        return null;
+    }
+
+    public void xoaSinhVien(String mssv) {
+//        for (SinhVien sv : listSinhVien) {
+//            if (sv.getMssv().equals(mssv)) {
+//                listSinhVien.remove(sv);
+//            }
+//        }
+        for (int i = 0; i < listSinhVien.size(); i++) {
+            if (listSinhVien.get(i).getMssv().equals(mssv)) {
+                listSinhVien.remove(i);
+            }
+        }
+    }
+
 }

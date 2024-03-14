@@ -7,8 +7,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,64 +26,85 @@ import java.util.List;
 })
 public class SinhVienServlet extends HttpServlet {
 
-    private SinhVienService service = new SinhVienService();
-    private List<SinhVien>lists = new ArrayList<>();
+    private SinhVienService sinhVienService = new SinhVienService();
+    private List<SinhVien> lists = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // B1: Lay noi dung uri tren duong dan
+        // B1: Lay ra duong dan tren url
         String uri = request.getRequestURI();
+        // B2: Kiem tra no thuoc url nao trong nhung cai co san
         if (uri.contains("hien-thi")) {
-            //hiển thi ds sinh vien
-            this.hienThi(request, response);
+            // thuc hien chuc nang hien thi
+            this.hienThiSinhVien(request, response);
         } else if (uri.contains("search")) {
-            this.search(request, response);
+            // search
+            this.searchSinhVien(request, response);
         } else if (uri.contains("remove")) {
-            this.remove(request, response);
+            this.removeSinhVien(request, response);
         } else if (uri.contains("detail")) {
-            this.detail(request, response);
+            this.detailSinhVien(request, response);
         } else if (uri.contains("view-update")) {
-            this.viewUpdate(request, response);
+            this.viewUpdateSinhVien(request, response);
+        } else if (uri.contains("view-add")) {
+            this.viewAddSinhVien(request, response);
         } else {
-            this.viewAdd(request, response);
+            this.hienThiSinhVien(request, response);
         }
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if (uri.contains("update")) {
-            //update ds sinh vien
-            this.update(request, response);
+            this.updateSinhVien(request, response);
         } else {
-            this.add(request, response);
+            this.addSinhVien(request, response);
         }
     }
 
-    private void add(HttpServletRequest request, HttpServletResponse response) {
+    private void viewAddSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/buoi4/add-sinh-vien.jsp").forward(request, response);
     }
 
-    private void update(HttpServletRequest request, HttpServletResponse response) {
+    private void viewUpdateSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // B1: lay mssv tu url
+        String mssv = request.getParameter("id2");
+        // B2: Goi service
+        SinhVien sv = sinhVienService.detail(mssv);
+        request.setAttribute("b", sv);
+        request.getRequestDispatcher("/buoi4/update-sinh-vien.jsp").forward(request, response);
     }
 
-    private void viewAdd(HttpServletRequest request, HttpServletResponse response) {
+    private void detailSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // B1: lay mssv tu url
+        String mssv = request.getParameter("id1");
+        // B2: Goi service
+        SinhVien sv = sinhVienService.detail(mssv);
+        request.setAttribute("b", sv);
+        request.getRequestDispatcher("/buoi4/detail-sinh-vien.jsp").forward(request, response);
     }
 
-    private void viewUpdate(HttpServletRequest request, HttpServletResponse response) {
+    private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String mssv = request.getParameter("id");
+        sinhVienService.xoaSinhVien(mssv);
+        response.sendRedirect("/sinh-vien/hien-thi");
     }
 
-    private void detail(HttpServletRequest request, HttpServletResponse response) {
+    private void searchSinhVien(HttpServletRequest request, HttpServletResponse response) {
     }
 
-    private void remove(HttpServletRequest request, HttpServletResponse response) {
+    private void hienThiSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        lists = sinhVienService.getAll(); // fake data : 5
+        request.setAttribute("a", lists);
+        request.getRequestDispatcher("/buoi4/sinhviens.jsp").forward(request, response);
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) {
+    private void addSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
+
     }
 
-    private void hienThi(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        lists = service.getAll();
-        request.setAttribute("listSinhVien",lists);
-        request.getRequestDispatcher("/buoi4/sinhviens.jsp").forward(request,response);
+    private void updateSinhVien(HttpServletRequest request, HttpServletResponse response) {
     }
 }

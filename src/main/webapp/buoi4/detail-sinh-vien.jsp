@@ -1,18 +1,17 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    MSSV:
+    MSSV:${b.mssv}
     <br/>
-    Ten:
+    Ten:${b.ten}
     <br/>
-    Tuoi:
+    Tuoi:${b.tuoi}
     <br/>
-    Dia chi:
+    Dia chi:${b.diaChi}
     <br/>
-    Gioi tinh:
+    Gioi tinh:${b.gioiTinh}
 </body>
 </html>
