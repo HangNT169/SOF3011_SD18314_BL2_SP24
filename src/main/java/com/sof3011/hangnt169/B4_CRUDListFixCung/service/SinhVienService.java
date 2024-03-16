@@ -44,4 +44,9 @@ public class SinhVienService {
         }
     }
 
+    // HashMap => Nem validate ben service
+    public void addSinhVien(SinhVien sv){
+        listSinhVien.add(sv);
+    }
+
 }

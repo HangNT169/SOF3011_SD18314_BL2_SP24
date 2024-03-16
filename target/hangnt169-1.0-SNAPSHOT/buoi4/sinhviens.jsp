@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,7 +12,7 @@
         <button type="submit">Search</button>
     </form>
     <br/>
-    <button><a href="">Add Student</a></button>
+    <button><a href="/sinh-vien/view-add">Add Student</a></button>
     <tr>
         <th>STT</th>
         <th>MSSV</th>
@@ -23,6 +24,22 @@
     </tr>
     </thead>
     <tbody>
+    <%--    for(Doi tuong : mang)--%>
+    <c:forEach items="${a}" var="sv" varStatus="i">
+        <tr>
+            <td>${i.index}</td>
+            <td>${sv.mssv}</td>
+            <td>${sv.ten}</td>
+            <td>${sv.tuoi}</td>
+            <td>${sv.diaChi}</td>
+            <td>${sv.gioiTinh}</td>
+            <td>
+                <a href="/sinh-vien/remove?id=${sv.mssv}">Delete</a>
+                <a href="/sinh-vien/detail?id1=${sv.mssv}">Detail</a>
+                <a href="/sinh-vien/view-update?id2=${sv.mssv}">Update</a>
+            </td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>

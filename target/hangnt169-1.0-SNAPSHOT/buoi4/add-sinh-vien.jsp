@@ -5,10 +5,10 @@
 </head>
 <body>
 
-<form action="" method="post">
-    MSSV: <input type="text" name="mssv"/>
+<form action="/sinh-vien/add" method="post">
+    MSSV: <input type="text" name="hangnt169"/>
     <br/>
-    Tên: <input type="text" name="ten"/>
+    Tên: <input type="text" name="nguyenvv4"/>
     <br/>
     Tuổi: <input type="text" name="tuoi"/>
     <br/>

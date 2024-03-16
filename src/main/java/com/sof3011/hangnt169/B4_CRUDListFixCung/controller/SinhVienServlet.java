@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -86,10 +87,13 @@ public class SinhVienServlet extends HttpServlet {
         request.getRequestDispatcher("/buoi4/detail-sinh-vien.jsp").forward(request, response);
     }
 
-    private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void removeSinhVien(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String mssv = request.getParameter("id");
         sinhVienService.xoaSinhVien(mssv);
         response.sendRedirect("/sinh-vien/hien-thi");
+//        lists = sinhVienService.getAll();
+//        request.setAttribute("a", lists);
+//        request.getRequestDispatcher("/buoi4/sinhviens.jsp").forward(request, response);
     }
 
     private void searchSinhVien(HttpServletRequest request, HttpServletResponse response) {
@@ -102,7 +106,11 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void addSinhVien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, IllegalAccessException {
-
+        SinhVien sv = new SinhVien();
+        // Tu dong map toan bo du lieu ma nguoi dung nhap cho doi tuong bean o phia dang truoc muon gan
+        BeanUtils.populate(sv, request.getParameterMap());
+        sinhVienService.addSinhVien(sv);
+        response.sendRedirect("/sinh-vien/hien-thi");
     }
 
     private void updateSinhVien(HttpServletRequest request, HttpServletResponse response) {
