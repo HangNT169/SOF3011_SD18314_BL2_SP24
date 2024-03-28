@@ -23,6 +23,15 @@ public class Category1 {
      * 1. Mapping table => thuc the
      *      1 class => 1 table
      *      thuoc tinh => column cua table: khoa chinh, khoa ngoai, cot binh thuong
+     * 2. Relationship:
+     *      1 - 1 : One to One
+     *      1- N: One to Many
+     *      N - 1: Many to One
+     *      N - N: Many to Many => Xu ly trong SQL
+     *      1 Category -> N Product
+     *      1 Product -> 1 Category
+     *      => Nhieu => Product
+     *      => Chi can mapping 1 chieu la dc
      */
 
     @Id
