@@ -25,7 +25,8 @@ public class ProductService {
         }
         return lists;
     }
-
+    // lamda -> 
+    // method reference ::
     private ProductResponse convertProductToResponse(Product p) {
         ProductResponse response = new ProductResponse();
         response.setProductID(p.getId1());
